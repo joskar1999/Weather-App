@@ -1,6 +1,5 @@
 package com.oskarjerzyk.weatherapp;
 
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -36,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
     }
 
+    /**
+     * Creating tabs 'NOW' and 'FORECAST'
+     */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            switch (position){
+            switch (position) {
                 case 0:
                     NowFragment nowFragment = new NowFragment();
                     return nowFragment;
@@ -58,19 +60,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             return 2;
-        }
-
-        @Nullable
-        @Override
-        public CharSequence getPageTitle(int position) {
-
-            switch (position){
-                case 0:
-                    return "NOW";
-                case 1:
-                    return "FORECAST";
-            }
-            return null;
         }
     }
 }
