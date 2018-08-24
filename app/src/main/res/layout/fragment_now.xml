@@ -13,6 +13,7 @@
         android:padding="@dimen/weather_data_padding">
 
         <TextView
+            android:id="@+id/city_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -22,6 +23,7 @@
             tools:text="Poznań" />
 
         <TextView
+            android:id="@+id/coord_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/weather_values_margin"
@@ -116,6 +118,7 @@
                 android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/pressure_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/weather_values_margin"
@@ -143,6 +146,7 @@
                 android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/humidity_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/weather_values_margin"
@@ -170,6 +174,7 @@
                 android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/wind_speed_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/weather_values_margin"
@@ -197,6 +202,7 @@
                 android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/clouds_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/weather_values_margin"
