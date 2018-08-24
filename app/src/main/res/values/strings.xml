@@ -8,4 +8,10 @@
     <string name="clouds">Clouds</string>
     <string name="sunrise">Sunrise</string>
     <string name="sunset">Sunset</string>
+    <string name="sunny">Sunny</string>
+    <string name="partly_cloudy">Partly cloudy</string>
+    <string name="mostly_cloudy">Mostly cloudy</string>
+    <string name="cloudy">Cloudy</string>
+    <string name="rainy">Rainy</string>
+    <string name="lightning">Lightning</string>
 </resources>

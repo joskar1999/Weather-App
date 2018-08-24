@@ -1,7 +1,285 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryLight">
+
+    <RelativeLayout
+        android:id="@+id/location_data_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/weather_data_margin"
+        android:padding="@dimen/weather_data_padding">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/weather_data_margin"
+            android:textColor="@color/colorText"
+            android:textSize="18sp"
+            tools:text="Poznań" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/weather_values_margin"
+            android:textColor="@color/colorText"
+            android:textSize="18sp"
+            tools:text="coord: 52.40, 16.76" />
+
+    </RelativeLayout>
+
+    <!-- Temperature and status data-->
+
+    <RelativeLayout
+        android:id="@+id/status_weather_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/location_data_layout">
+
+        <TextView
+            android:id="@+id/temperature_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/weather_data_margin"
+            android:padding="@dimen/weather_data_padding"
+            android:textColor="@color/colorText"
+            android:textSize="76sp"
+            tools:text="20 C" />
+
+        <ImageView
+            android:id="@+id/icon_imageview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="@dimen/weather_data_margin"
+            tools:src="@drawable/partly_cloudy" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/description_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/status_weather_layout">
+
+        <TextView
+            android:id="@+id/date_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/weather_data_margin"
+            android:padding="@dimen/weather_data_padding"
+            android:textColor="@color/colorText"
+            android:textSize="14sp"
+            tools:text="21 August, 14:35" />
+
+        <TextView
+            android:id="@+id/description_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="60dp"
+            android:padding="@dimen/weather_data_padding"
+            android:textColor="@color/colorText"
+            android:textSize="14sp"
+            tools:text="Partly cloudy" />
+
+    </RelativeLayout>
+
+    <!-- Weather data -->
+
+    <RelativeLayout
+        android:id="@+id/weather_data_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/description_layout"
+        android:layout_marginTop="@dimen/weather_data_margin">
+
+        <!-- Pressure -->
+
+        <RelativeLayout
+            android:id="@+id/pressure_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/weather_data_padding">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/weather_data_margin"
+                android:text="@string/pressure"
+                android:textColor="@color/colorText"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/weather_values_margin"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                tools:text="1020hPa" />
+
+        </RelativeLayout>
+
+        <!-- Humidity -->
+
+        <RelativeLayout
+            android:id="@+id/humidity_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pressure_layout"
+            android:padding="@dimen/weather_data_padding">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/weather_data_margin"
+                android:text="@string/humidity"
+                android:textColor="@color/colorText"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/weather_values_margin"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                tools:text="65%" />
+
+        </RelativeLayout>
+
+        <!-- Wind speed -->
+
+        <RelativeLayout
+            android:id="@+id/wind_speed_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/humidity_layout"
+            android:padding="@dimen/weather_data_padding">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/weather_data_margin"
+                android:text="@string/wind_speed"
+                android:textColor="@color/colorText"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/weather_values_margin"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                tools:text="14 km/h" />
+
+        </RelativeLayout>
+
+        <!-- Clouds-->
+
+        <RelativeLayout
+            android:id="@+id/clouds_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/wind_speed_layout"
+            android:padding="@dimen/weather_data_padding">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/weather_data_margin"
+                android:text="@string/clouds"
+                android:textColor="@color/colorText"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/weather_values_margin"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                tools:text="25 %" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <!-- Sunrise / Sunset-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/weather_data_margin">
+
+        <ImageView
+            android:id="@+id/horizon_imageview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/horizon" />
+
+        <RelativeLayout
+            android:id="@+id/rise_set_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/horizon_imageview">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/rise_set_margin"
+                android:padding="@dimen/weather_data_padding"
+                android:text="@string/sunrise"
+                android:textColor="@color/colorText"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/rise_set_margin"
+                android:padding="@dimen/weather_data_padding"
+                android:text="@string/sunset"
+                android:textColor="@color/colorText"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rise_set_layout">
+
+            <TextView
+                android:id="@+id/sunrise_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/rise_set_margin"
+                android:padding="@dimen/weather_data_padding"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                tools:text="5:44" />
+
+            <TextView
+                android:id="@+id/sunset_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/rise_set_margin"
+                android:padding="@dimen/weather_data_padding"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                tools:text="20:06" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>
