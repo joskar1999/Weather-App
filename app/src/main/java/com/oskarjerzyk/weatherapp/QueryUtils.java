@@ -17,61 +17,59 @@ import java.nio.charset.Charset;
 
 public class QueryUtils {
 
-    public static Weather getCurrentData(double lat, double lon) throws IOException {
-        Weather weather = null;
-        URL url = createCurrentWeatherUrl(lat, lon);
-        String response = makeHttpRequest(url);
-        weather = extractDataFromJson(response);
-
-        return weather;
+    public QueryUtils() {
+        //
     }
 
-    private static URL createCurrentWeatherUrl(double lat, double lon) {
-        URL url = null;
-
-        String requestUrl = "api.openweathermap.org/data/2.5/weather?lat=";
+    public String createCurrentWeatherRequestUrl(double lat, double lon) {
+        String requestUrl = "https://api.openweathermap.org/data/2.5/weather?lat=";
         requestUrl = requestUrl + Double.toString(lat) + "&lon=" + Double.toString(lon);
         requestUrl = requestUrl + "&appid=841c8cc735c2ac70e615bdb4b1bd3236";
-
-        try {
-            url = new URL(requestUrl);
-        } catch (MalformedURLException e) {
-            return null;
-        }
-        return url;
+        return requestUrl;
     }
 
-    private static String makeHttpRequest(URL url) throws IOException {
-        String jsonresponse = "";
-        HttpURLConnection httpURLConnection = null;
+    public String makeHttpRequest(String requestUrl) throws IOException {
+
+        URL url = new URL(requestUrl);
+        HttpURLConnection urlConnection = null;
         InputStream inputStream = null;
+        String jsonResponse = "";
 
         try {
-            httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setRequestMethod("GET");
-            httpURLConnection.setReadTimeout(10000);
-            httpURLConnection.setConnectTimeout(10000);
-            httpURLConnection.connect();
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("GET");
+            urlConnection.setReadTimeout(10000);
+            urlConnection.setConnectTimeout(10000);
+            urlConnection.connect();
 
-            if (httpURLConnection.getResponseCode() == 200) {
-                inputStream = httpURLConnection.getInputStream();
-                jsonresponse = readFromStream(inputStream);
+            if (urlConnection.getResponseCode() == 200) {
+                inputStream = urlConnection.getInputStream();
+                jsonResponse = readFromStream(inputStream);
             }
         } catch (IOException e) {
-
+            //
         } finally {
-            if (httpURLConnection != null) {
-                httpURLConnection.disconnect();
+            if (urlConnection != null) {
+                urlConnection.disconnect();
             }
             if (inputStream != null) {
                 inputStream.close();
             }
         }
-
-        return jsonresponse;
+        return jsonResponse;
     }
 
-    private static String readFromStream(InputStream inputStream) throws IOException {
+    public URL createUrl(String stringUrl) {
+        URL url = null;
+        try {
+            url = new URL(stringUrl);
+        } catch (MalformedURLException exception) {
+            return null;
+        }
+        return url;
+    }
+
+    public String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
 
         if (inputStream != null) {
@@ -87,41 +85,41 @@ public class QueryUtils {
         return output.toString();
     }
 
-    private static Weather extractDataFromJson(String json) {
+    public Weather extractDataFromJson(String json) throws JSONException {
 
         if (TextUtils.isEmpty(json)) {
             return null;
         }
 
-        try {
-            JSONObject baseJsonResponse = new JSONObject(json);
-            JSONObject coordJSON = baseJsonResponse.getJSONObject("coord");
-            JSONArray weatherJSON = baseJsonResponse.getJSONArray("weather");
-            JSONObject weatherJSONExtracted = (JSONObject) weatherJSON.get(0);
-            JSONObject mainJSON = baseJsonResponse.getJSONObject("main");
-            JSONObject windJSON = baseJsonResponse.getJSONObject("wind");
-            JSONObject cloudsJSON = baseJsonResponse.getJSONObject("clouds");
-            JSONObject sysJSON = baseJsonResponse.getJSONObject("sys");
+        JSONObject base = new JSONObject(json);
+        JSONObject coordJsonObject = base.getJSONObject("coord");
+        JSONArray weatherJsonArray = base.getJSONArray("weather");
+        JSONObject weatherJsonObject = weatherJsonArray.getJSONObject(0);
+        JSONObject mainJsonObject = base.getJSONObject("main");
+        JSONObject windJsonObject = base.getJSONObject("wind");
+        JSONObject cloudsJsonObject = base.getJSONObject("clouds");
+        JSONObject sysJsonObject = base.getJSONObject("sys");
 
-            String lat = coordJSON.getString("lat");
-            String lon = coordJSON.getString("lon");
-            double temperature = mainJSON.getDouble("temp") - 273.15;
-            int pressure = mainJSON.getInt("pressure");
-            int humidity = mainJSON.getInt("humidity");
-            double windSpeed = windJSON.getDouble("speed");
-            int clouds = cloudsJSON.getInt("all");
-            long sunrise = sysJSON.getLong("sunrise");
-            long sunset = sysJSON.getLong("sunset");
-            String city = baseJsonResponse.getString("name");
-            String main = weatherJSONExtracted.getString("main");
-            String icon = weatherJSONExtracted.getString("icon");
+        double lon = coordJsonObject.getDouble("lon");
+        double lat = coordJsonObject.getDouble("lat");
+        String desc = weatherJsonObject.getString("description");
+        String icon = weatherJsonObject.getString("icon");
+        double temp = mainJsonObject.getDouble("temp");
+        int pressure = mainJsonObject.getInt("pressure");
+        int humidity = mainJsonObject.getInt("humidity");
+        double windSpeed = windJsonObject.getDouble("speed");
+        int clouds = cloudsJsonObject.getInt("all");
+        long sunrise = sysJsonObject.getLong("sunrise");
+        long sunset = sysJsonObject.getLong("sunset");
+        String city = base.getString("name");
 
-            return new Weather(lat, lon, temperature, pressure, humidity, windSpeed, clouds, sunrise, sunset, city, main, icon);
+        Weather weather = new Weather(lon, lat, desc, icon, temp, pressure, humidity, windSpeed, clouds, sunrise, sunset, city);
+        return weather;
+    }
 
-        } catch (JSONException e) {
-
-        }
-
-        return null;
+    public int convertKelvinToCelsius(double k) {
+        k -= 273.15;
+        int c = (int) k;
+        return c;
     }
 }

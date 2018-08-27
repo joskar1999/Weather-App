@@ -2,9 +2,11 @@ package com.oskarjerzyk.weatherapp;
 
 public class Weather {
 
-    private String lat;
-    private String lon;
-    private double temperature;
+    private double lon;
+    private double lat;
+    private String desc;
+    private String icon;
+    private double temp;
     private int pressure;
     private int humidity;
     private double windSpeed;
@@ -12,69 +14,115 @@ public class Weather {
     private long sunrise;
     private long sunset;
     private String city;
-    private String description;
-    private String icon;
 
-    public Weather(String lat, String lon, double temperature, int pressure, int humidity, double windSpeed, int clouds, long sunrise, long sunset, String city, String description, String icon) {
-        this.lat = lat;
+    public Weather(double lon, double lat, String desc, String icon, double temp, int pressure, int humidity, double windSpeed, int clouds, long sunrise, long sunset, String name) {
         this.lon = lon;
-        this.temperature = temperature;
+        this.lat = lat;
+        this.desc = desc;
+        this.icon = icon;
+        this.temp = temp;
         this.pressure = pressure;
         this.humidity = humidity;
         this.windSpeed = windSpeed;
         this.clouds = clouds;
         this.sunrise = sunrise;
         this.sunset = sunset;
-        this.city = city;
-        this.description = description;
-        this.icon = icon;
+        this.city = name;
     }
 
-    public String getLat() {
-        return lat;
-    }
-
-    public String getLon() {
+    public double getLon() {
         return lon;
     }
 
-    public double getTemperature() {
-        return temperature;
+    public void setLon(double lon) {
+        this.lon = lon;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public double getTemp() {
+        return temp;
+    }
+
+    public void setTemp(double temp) {
+        this.temp = temp;
     }
 
     public int getPressure() {
         return pressure;
     }
 
+    public void setPressure(int pressure) {
+        this.pressure = pressure;
+    }
+
     public int getHumidity() {
         return humidity;
+    }
+
+    public void setHumidity(int humidity) {
+        this.humidity = humidity;
     }
 
     public double getWindSpeed() {
         return windSpeed;
     }
 
+    public void setWindSpeed(double windSpeed) {
+        this.windSpeed = windSpeed;
+    }
+
     public int getClouds() {
         return clouds;
+    }
+
+    public void setClouds(int clouds) {
+        this.clouds = clouds;
     }
 
     public long getSunrise() {
         return sunrise;
     }
 
+    public void setSunrise(long sunrise) {
+        this.sunrise = sunrise;
+    }
+
     public long getSunset() {
         return sunset;
+    }
+
+    public void setSunset(long sunset) {
+        this.sunset = sunset;
     }
 
     public String getCity() {
         return city;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public String getIcon() {
-        return icon;
+    public void setCity(String city) {
+        this.city = city;
     }
 }
