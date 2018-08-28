@@ -145,11 +145,12 @@ public class QueryUtils {
         int humidity = mainJsonObject.getInt("humidity");
         double windSpeed = windJsonObject.getDouble("speed");
         int clouds = cloudsJsonObject.getInt("all");
+        long date = base.getLong("dt");
         long sunrise = sysJsonObject.getLong("sunrise");
         long sunset = sysJsonObject.getLong("sunset");
         String city = base.getString("name");
 
-        Weather weather = new Weather(lon, lat, desc, icon, temp, pressure, humidity, windSpeed, clouds, sunrise, sunset, city);
+        Weather weather = new Weather(lon, lat, desc, icon, temp, pressure, humidity, windSpeed, clouds, date, sunrise, sunset, city);
         return weather;
     }
 }

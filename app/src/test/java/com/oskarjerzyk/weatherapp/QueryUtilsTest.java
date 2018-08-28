@@ -61,11 +61,11 @@ public class QueryUtilsTest {
 
     @Test
     public void shouldExtractDataFromJson() throws JSONException {
-        Weather weather = new Weather(16.5, 52.5, "clear sky", "01d", 296.15, 1013, 27, 5.1, 0, 1535342237, 1535392339, "Kazmierz");
-        assertEquals(weather.getLat(), queryUtils.extractDataFromJson(FAKE_JSON_RESPONSE).getLat(),DELTA);
+        Weather weather = new Weather(16.5, 52.5, "clear sky", "01d", 296.15, 1013, 27, 5.1, 0, 1535380200, 1535342237, 1535392339, "Kazmierz");
+        assertEquals(weather.getLat(), queryUtils.extractDataFromJson(FAKE_JSON_RESPONSE).getLat(), DELTA);
         assertEquals(weather.getDesc(), queryUtils.extractDataFromJson(FAKE_JSON_RESPONSE).getDesc());
         assertEquals(weather.getHumidity(), queryUtils.extractDataFromJson(FAKE_JSON_RESPONSE).getHumidity());
-        assertEquals(weather.getWindSpeed(), queryUtils.extractDataFromJson(FAKE_JSON_RESPONSE).getWindSpeed(),DELTA);
+        assertEquals(weather.getWindSpeed(), queryUtils.extractDataFromJson(FAKE_JSON_RESPONSE).getWindSpeed(), DELTA);
         assertEquals(weather.getClouds(), queryUtils.extractDataFromJson(FAKE_JSON_RESPONSE).getClouds());
         assertEquals(weather.getSunrise(), queryUtils.extractDataFromJson(FAKE_JSON_RESPONSE).getSunrise());
         assertEquals(weather.getCity(), queryUtils.extractDataFromJson(FAKE_JSON_RESPONSE).getCity());
