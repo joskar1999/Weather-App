@@ -17,7 +17,7 @@ import static org.junit.Assert.assertNotEquals;
 public class QueryUtilsTest {
 
     private static final String FAKE_REQUEST_URL = "https://api.openweathermap.org/data/2.5/weather?lat=52.16&lon=16.72&appid=841c8cc735c2ac70e615bdb4b1bd3236";
-    private static final String FAKE_JSON_RESPONSE = "{\"coord\":{\"lon\":16.5,\"lat\":52.5},\"weather\":[{\"id\":800,\"main\":\"Clear\",\"description\":\"clear sky\",\"icon\":\"01d\"}],\"base\":\"stations\",\"main\":{\"temp\":296.15,\"pressure\":1013,\"humidity\":27,\"temp_min\":296.15,\"temp_max\":296.15},\"visibility\":10000,\"wind\":{\"speed\":5.1,\"deg\":190},\"clouds\":{\"all\":0},\"dt\":1535380200,\"sys\":{\"type\":1,\"id\":5364,\"message\":0.4352,\"country\":\"PL\",\"sunrise\":1535342237,\"sunset\":1535392339},\"id\":3096392,\"name\":\"Kazmierz\",\"cod\":200}";
+    private static final String FAKE_JSON_RESPONSE = "{\"coord\":{\"lon\":16.5,\"lat\":52.5},\"weather\":[{\"id\":800,\"main\":\"Clear\",\"description\":\"clear sky\",\"icon\":\"d1\"}],\"base\":\"stations\",\"main\":{\"temp\":296.15,\"pressure\":1013,\"humidity\":27,\"temp_min\":296.15,\"temp_max\":296.15},\"visibility\":10000,\"wind\":{\"speed\":5.1,\"deg\":190},\"clouds\":{\"all\":0},\"dt\":1535380200,\"sys\":{\"type\":1,\"id\":5364,\"message\":0.4352,\"country\":\"PL\",\"sunrise\":1535342237,\"sunset\":1535392339},\"id\":3096392,\"name\":\"Kazmierz\",\"cod\":200}";
     private static final double DELTA = 0.0000001;
 
     private QueryUtils queryUtils;
@@ -61,7 +61,7 @@ public class QueryUtilsTest {
 
     @Test
     public void shouldExtractDataFromJson() throws JSONException {
-        Weather weather = new Weather(16.5, 52.5, "clear sky", "01d", 296.15, 1013, 27, 5.1, 0, 1535380200, 1535342237, 1535392339, "Kazmierz");
+        Weather weather = new Weather(16.5, 52.5, "clear sky", "d1", 296.15, 1013, 27, 5.1, 0, 1535380200, 1535342237, 1535392339, "Kazmierz");
         assertEquals(weather.getLat(), queryUtils.extractDataFromJson(FAKE_JSON_RESPONSE).getLat(), DELTA);
         assertEquals(weather.getDesc(), queryUtils.extractDataFromJson(FAKE_JSON_RESPONSE).getDesc());
         assertEquals(weather.getHumidity(), queryUtils.extractDataFromJson(FAKE_JSON_RESPONSE).getHumidity());
