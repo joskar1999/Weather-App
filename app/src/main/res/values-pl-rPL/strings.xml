@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WeatherApp</string>
+    <string name="now">AKTUALNIE</string>
+    <string name="forecast">PROGNOZA</string>
+    <string name="pressure">Ciśnienie</string>
+    <string name="humidity">Wilgotność</string>
+    <string name="wind_speed">Prędkość wiatru</string>
+    <string name="clouds">Chmury</string>
+    <string name="sunrise">Wschód</string>
+    <string name="sunset">Zachód</string>
+    <string name="clear_sky">Czyste niebo</string>
+    <string name="few_clouds">Kilka chmur</string>
+    <string name="scattered_clouds">Wiele chmur</string>
+    <string name="broken_clouds">Pochmurno</string>
+    <string name="shower_rain">Lekki deszcz</string>
+    <string name="rain">Deszcz</string>
+    <string name="thunderstorm">Burza</string>
+    <string name="snow">Śnieg</string>
+    <string name="mist">Mgła</string>
+</resources>
