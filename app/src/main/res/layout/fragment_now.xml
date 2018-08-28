@@ -9,7 +9,7 @@
         android:id="@+id/location_data_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/weather_data_margin"
+        android:layout_marginTop="10dp"
         android:padding="@dimen/weather_data_padding">
 
         <TextView
@@ -220,7 +220,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/weather_data_margin">
+        android:layout_marginBottom="60dp">
 
         <ImageView
             android:id="@+id/horizon_imageview"

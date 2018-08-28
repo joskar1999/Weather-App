@@ -6,17 +6,25 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.net.URL;
 
 public class NowFragment extends Fragment implements LocationListener {
 
@@ -35,10 +43,11 @@ public class NowFragment extends Fragment implements LocationListener {
 
     private LocationManager locationManager;
 
-    private String latitude;
-    private String longitude;
+    private double lat;
+    private double lon;
 
     public NowFragment() {
+        //
     }
 
     @Override
@@ -83,8 +92,8 @@ public class NowFragment extends Fragment implements LocationListener {
 
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
-        }else {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        } else {
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 60000, 0, this);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 0, this);
         }
@@ -97,11 +106,20 @@ public class NowFragment extends Fragment implements LocationListener {
         locationManager.removeUpdates(this);
     }
 
+    /**
+     * When location is changed this method will be invoked
+     * Getting users location and executing AsyncTask
+     * @param location
+     */
     @Override
     public void onLocationChanged(Location location) {
-        latitude = String.valueOf(location.getLatitude());
-        longitude = String.valueOf(location.getLongitude());
+        lat = location.getLatitude();
+        lon = location.getLongitude();
+
+        WeatherAsyncTask task = new WeatherAsyncTask();
+        task.execute();
     }
+
 
     @Override
     public void onStatusChanged(String s, int i, Bundle bundle) {
@@ -116,5 +134,64 @@ public class NowFragment extends Fragment implements LocationListener {
     @Override
     public void onProviderDisabled(String s) {
         //
+    }
+
+    /**
+     * Executing http request and updating UI with new weather data
+     */
+    private class WeatherAsyncTask extends AsyncTask<URL, Void, Weather> {
+
+        @Override
+        protected Weather doInBackground(URL... urls) {
+
+            QueryUtils queryUtils = new QueryUtils();
+            Weather weather = null;
+            String jsonResponse = "";
+            String requestUrl = "";
+            requestUrl = queryUtils.createCurrentWeatherRequestUrl(lat, lon);
+            try {
+                jsonResponse = queryUtils.makeHttpRequest(requestUrl);
+            } catch (IOException e) {
+                Toast.makeText(getContext(), "HTTP request error!", Toast.LENGTH_SHORT).show();
+            }
+            try {
+                weather = queryUtils.extractDataFromJson(jsonResponse);
+            } catch (JSONException e) {
+                Toast.makeText(getContext(), "JSON processing error!", Toast.LENGTH_SHORT).show();
+            }
+
+            return weather;
+        }
+
+        @Override
+        protected void onPostExecute(Weather weather) {
+
+            if (weather == null) {
+                return;
+            }
+            updateUi(weather);
+        }
+    }
+
+    private void updateUi(Weather weather) {
+        //TODO switch(icon)
+        cityTextView.setText(weather.getCity());
+        coordTextView.setText("coord: " + Double.toString(weather.getLat()) + ", " + Double.toString(weather.getLon()));
+        temperatureTextView.setText(Integer.toString(convertKelvinToCelsius(weather.getTemp())) + (char) 0x00B0 + "C");
+        descriptionTextView.setText(weather.getDesc());
+        dateTextView.setText("28 August, 2018"); //placeholder, to be modified
+        pressureTextView.setText(Integer.toString(weather.getPressure()) + " hPa");
+        humidityTextView.setText(Integer.toString(weather.getHumidity()) + " %");
+        windSpeedTextView.setText(Double.toString(weather.getWindSpeed()) + " km/h");
+        cloudsTextView.setText(Integer.toString(weather.getClouds()) + " %");
+        sunriseTextView.setText(Long.toString(weather.getSunrise()));
+        sunsetTextView.setText(Long.toString(weather.getSunset()));
+        iconImageView.setImageResource(R.drawable.partly_cloudy); //placeholder, to be modified
+    }
+
+    private int convertKelvinToCelsius(double k) {
+        k -= 273.15;
+        int c = (int) k;
+        return c;
     }
 }

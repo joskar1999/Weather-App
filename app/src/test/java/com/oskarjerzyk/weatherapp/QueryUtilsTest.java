@@ -68,10 +68,6 @@ public class QueryUtilsTest {
         assertEquals(weather.getWindSpeed(), queryUtils.extractDataFromJson(FAKE_JSON_RESPONSE).getWindSpeed(),DELTA);
         assertEquals(weather.getClouds(), queryUtils.extractDataFromJson(FAKE_JSON_RESPONSE).getClouds());
         assertEquals(weather.getSunrise(), queryUtils.extractDataFromJson(FAKE_JSON_RESPONSE).getSunrise());
-    }
-
-    @Test
-    public void shouldConvertKelvinToCelsius() {
-        assertEquals(23, queryUtils.convertKelvinToCelsius(296.56));
+        assertEquals(weather.getCity(), queryUtils.extractDataFromJson(FAKE_JSON_RESPONSE).getCity());
     }
 }

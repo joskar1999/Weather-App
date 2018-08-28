@@ -21,6 +21,14 @@ public class QueryUtils {
         //
     }
 
+    /**
+     * Creating API request URL, which will be used to retrieve
+     * current weather data from openweathermap.com
+     *
+     * @param lat users latitude
+     * @param lon users longitude
+     * @return URL to API with current weather data
+     */
     public String createCurrentWeatherRequestUrl(double lat, double lon) {
         String requestUrl = "https://api.openweathermap.org/data/2.5/weather?lat=";
         requestUrl = requestUrl + Double.toString(lat) + "&lon=" + Double.toString(lon);
@@ -28,6 +36,13 @@ public class QueryUtils {
         return requestUrl;
     }
 
+    /**
+     * Methods performs http request
+     *
+     * @param requestUrl URL which will be proceeded
+     * @return API response in JSON format, String
+     * @throws IOException
+     */
     public String makeHttpRequest(String requestUrl) throws IOException {
 
         URL url = new URL(requestUrl);
@@ -59,6 +74,12 @@ public class QueryUtils {
         return jsonResponse;
     }
 
+    /**
+     * Converting String to URL object
+     *
+     * @param stringUrl String to be converted
+     * @return URL object
+     */
     public URL createUrl(String stringUrl) {
         URL url = null;
         try {
@@ -69,6 +90,13 @@ public class QueryUtils {
         return url;
     }
 
+    /**
+     * Converting InputStream to String
+     *
+     * @param inputStream
+     * @return converted String
+     * @throws IOException
+     */
     public String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
 
@@ -85,6 +113,14 @@ public class QueryUtils {
         return output.toString();
     }
 
+    /**
+     * Retrieving data from JSON response,
+     * data will be stored in Weather object
+     *
+     * @param json response from API converted to String in JSON format
+     * @return Weather object with current weather data
+     * @throws JSONException
+     */
     public Weather extractDataFromJson(String json) throws JSONException {
 
         if (TextUtils.isEmpty(json)) {
@@ -115,11 +151,5 @@ public class QueryUtils {
 
         Weather weather = new Weather(lon, lat, desc, icon, temp, pressure, humidity, windSpeed, clouds, sunrise, sunset, city);
         return weather;
-    }
-
-    public int convertKelvinToCelsius(double k) {
-        k -= 273.15;
-        int c = (int) k;
-        return c;
     }
 }
