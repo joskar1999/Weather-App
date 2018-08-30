@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_margin="8dp"
+    android:background="@color/colorPrimary">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tempetature_card_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/colorText"
+            android:textSize="72sp"
+            tools:text="20 C" />
+
+        <TextView
+            android:id="@+id/hour_card_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tempetature_card_textview"
+            android:layout_marginLeft="16dp"
+            android:padding="4dp"
+            android:textColor="@color/colorText"
+            android:textSize="20sp"
+            tools:text="12:00" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/hour_card_textview"
+            android:layout_marginLeft="16dp"
+            android:padding="4dp"
+            android:textColor="@color/colorText"
+            android:textSize="16sp"
+            tools:text="30.08.2018" />
+
+        <ImageView
+            android:id="@+id/icon_card_imageview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="32dp"
+            tools:src="@drawable/partly_cloudy" />
+
+        <TextView
+            android:id="@+id/description_card_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/icon_card_imageview"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/colorText"
+            android:textSize="16sp"
+            tools:text="Partly cloudy" />
+
+    </RelativeLayout>
+    
+</android.support.v7.widget.CardView>
