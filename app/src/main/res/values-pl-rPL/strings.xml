@@ -11,11 +11,13 @@
     <string name="sunset">Zachód</string>
     <string name="clear_sky">Czyste niebo</string>
     <string name="few_clouds">Kilka chmur</string>
-    <string name="scattered_clouds">Wiele chmur</string>
+    <string name="scattered_clouds">Rozproszone chmur</string>
     <string name="broken_clouds">Pochmurno</string>
-    <string name="shower_rain">Lekki deszcz</string>
+    <string name="shower_rain">Ulewny deszcz</string>
     <string name="rain">Deszcz</string>
+    <string name="light_rain">Lekki deszcz</string>
     <string name="thunderstorm">Burza</string>
     <string name="snow">Śnieg</string>
     <string name="mist">Mgła</string>
+    <string name="overcast_clouds">Duże zachmurzenie</string>
 </resources>

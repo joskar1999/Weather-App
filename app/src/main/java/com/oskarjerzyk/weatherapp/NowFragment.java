@@ -177,7 +177,6 @@ public class NowFragment extends Fragment implements LocationListener {
         cityTextView.setText(weather.getCity());
         coordTextView.setText("coord: " + Double.toString(weather.getLat()) + ", " + Double.toString(weather.getLon()));
         temperatureTextView.setText(Integer.toString(ConvertUtils.convertKelvinToCelsius(weather.getTemp())) + (char) 0x00B0 + "C");
-        setWeatherDescription(weather.getDesc());
         dateTextView.setText(ConvertUtils.convertUnixTimeToDate(weather.getDate()));
         pressureTextView.setText(Integer.toString(weather.getPressure()) + " hPa");
         humidityTextView.setText(Integer.toString(weather.getHumidity()) + " %");
@@ -185,97 +184,7 @@ public class NowFragment extends Fragment implements LocationListener {
         cloudsTextView.setText(Integer.toString(weather.getClouds()) + " %");
         sunriseTextView.setText(ConvertUtils.convertUnixTimeToHour(weather.getSunrise()));
         sunsetTextView.setText(ConvertUtils.convertUnixTimeToHour(weather.getSunset()));
-        setWeatherIcon(weather.getIcon());
-    }
-
-    private void setWeatherDescription(String desc) {
-        switch (desc) {
-            case "clear sky":
-                descriptionTextView.setText(R.string.clear_sky);
-                break;
-            case "few clouds":
-                descriptionTextView.setText(R.string.few_clouds);
-                break;
-            case "scattered clouds":
-                descriptionTextView.setText(R.string.scattered_clouds);
-                break;
-            case "broken clouds":
-                descriptionTextView.setText(R.string.broken_clouds);
-                break;
-            case "shower rain":
-                descriptionTextView.setText(R.string.shower_rain);
-                break;
-            case "rain":
-                descriptionTextView.setText(R.string.rain);
-                break;
-            case "thunderstorm":
-                descriptionTextView.setText(R.string.thunderstorm);
-                break;
-            case "snow":
-                descriptionTextView.setText(R.string.snow);
-                break;
-            case "mist":
-                descriptionTextView.setText(R.string.mist);
-                break;
-        }
-    }
-
-    private void setWeatherIcon(String icon) {
-        switch (icon) {
-            case "01d":
-                iconImageView.setImageResource(R.drawable.d1);
-                break;
-            case "02d":
-                iconImageView.setImageResource(R.drawable.d2);
-                break;
-            case "03d":
-                iconImageView.setImageResource(R.drawable.d3);
-                break;
-            case "04d":
-                iconImageView.setImageResource(R.drawable.d4);
-                break;
-            case "09d":
-                iconImageView.setImageResource(R.drawable.d9);
-                break;
-            case "10d":
-                iconImageView.setImageResource(R.drawable.d10);
-                break;
-            case "11d":
-                iconImageView.setImageResource(R.drawable.d11);
-                break;
-            case "13d":
-                iconImageView.setImageResource(R.drawable.d13);
-                break;
-            case "50d":
-                iconImageView.setImageResource(R.drawable.d50);
-                break;
-            case "01n":
-                iconImageView.setImageResource(R.drawable.n1);
-                break;
-            case "02n":
-                iconImageView.setImageResource(R.drawable.n2);
-                break;
-            case "03n":
-                iconImageView.setImageResource(R.drawable.d3);
-                break;
-            case "04n":
-                iconImageView.setImageResource(R.drawable.d4);
-                break;
-            case "09n":
-                iconImageView.setImageResource(R.drawable.d9);
-                break;
-            case "10n":
-                iconImageView.setImageResource(R.drawable.n10);
-                break;
-            case "11n":
-                iconImageView.setImageResource(R.drawable.d11);
-                break;
-            case "13n":
-                iconImageView.setImageResource(R.drawable.d13);
-                break;
-            case "50n":
-                iconImageView.setImageResource(R.drawable.d50);
-                break;
-        }
+        iconImageView.setImageResource(ResourcesUtils.selectIconPath(weather.getIcon()));
+        descriptionTextView.setText(ResourcesUtils.selectWeatherDescriptionPath(weather.getDesc()));
     }
 }

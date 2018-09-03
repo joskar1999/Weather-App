@@ -14,7 +14,10 @@
     <string name="broken_clouds">Broken clouds</string>
     <string name="shower_rain">Shower rain</string>
     <string name="rain">Rain</string>
+    <string name="light_rain">Light rain</string>
     <string name="thunderstorm">Thunderstorm</string>
     <string name="snow">Snow</string>
     <string name="mist">Mist</string>
+    <string name="overcast_clouds">Overcast clouds</string>
+    <string name="undefined">Undefined</string>
 </resources>
