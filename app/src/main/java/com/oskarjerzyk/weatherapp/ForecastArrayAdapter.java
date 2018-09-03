@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class ForecastArrayAdapter extends RecyclerView.Adapter<ForecastArrayAdapter.ForecastViewHolder> {
@@ -36,9 +35,9 @@ public class ForecastArrayAdapter extends RecyclerView.Adapter<ForecastArrayAdap
     @Override
     public void onBindViewHolder(@NonNull ForecastViewHolder holder, int position) {
 
-        holder.tempTextView.setText(Integer.toString(convertKelvinToCelsius(data.get(position).getTemp())) + (char) 0x00B0 + "C");
-        holder.hourTextView.setText(convertUnixTimeToHour(data.get(position).getTime()));
-        holder.dateTextView.setText(convertUnixTimeToDate(data.get(position).getTime()));
+        holder.tempTextView.setText(Integer.toString(ConvertUtils.convertKelvinToCelsius(data.get(position).getTemp())) + (char) 0x00B0 + "C");
+        holder.hourTextView.setText(ConvertUtils.convertUnixTimeToHour(data.get(position).getTime()));
+        holder.dateTextView.setText(ConvertUtils.convertUnixTimeToDate(data.get(position).getTime()));
         holder.descTextView.setText(data.get(position).getDesc());
         holder.iconImageView.setImageResource(selectIconPath(data.get(position).getIcon()));
     }
@@ -65,24 +64,6 @@ public class ForecastArrayAdapter extends RecyclerView.Adapter<ForecastArrayAdap
             descTextView = (TextView) itemView.findViewById(R.id.description_card_textview);
             iconImageView = (ImageView) itemView.findViewById(R.id.icon_card_imageview);
         }
-    }
-
-    private int convertKelvinToCelsius(double k) {
-        k -= 273.15;
-        int c = (int) k;
-        return c;
-    }
-
-    private String convertUnixTimeToHour(long t) {
-        t *= 1000;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
-        return simpleDateFormat.format(t);
-    }
-
-    private String convertUnixTimeToDate(long t) {
-        t *= 1000;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        return simpleDateFormat.format(t);
     }
 
     private int selectIconPath(String icon) {

@@ -24,7 +24,6 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 
 public class NowFragment extends Fragment implements LocationListener {
 
@@ -177,15 +176,15 @@ public class NowFragment extends Fragment implements LocationListener {
     private void updateUi(Weather weather) {
         cityTextView.setText(weather.getCity());
         coordTextView.setText("coord: " + Double.toString(weather.getLat()) + ", " + Double.toString(weather.getLon()));
-        temperatureTextView.setText(Integer.toString(convertKelvinToCelsius(weather.getTemp())) + (char) 0x00B0 + "C");
+        temperatureTextView.setText(Integer.toString(ConvertUtils.convertKelvinToCelsius(weather.getTemp())) + (char) 0x00B0 + "C");
         setWeatherDescription(weather.getDesc());
-        dateTextView.setText(convertUnixTimeToDate(weather.getDate()));
+        dateTextView.setText(ConvertUtils.convertUnixTimeToDate(weather.getDate()));
         pressureTextView.setText(Integer.toString(weather.getPressure()) + " hPa");
         humidityTextView.setText(Integer.toString(weather.getHumidity()) + " %");
         windSpeedTextView.setText(Double.toString(weather.getWindSpeed()) + " km/h");
         cloudsTextView.setText(Integer.toString(weather.getClouds()) + " %");
-        sunriseTextView.setText(convertUnixTimeToHour(weather.getSunrise()));
-        sunsetTextView.setText(convertUnixTimeToHour(weather.getSunset()));
+        sunriseTextView.setText(ConvertUtils.convertUnixTimeToHour(weather.getSunrise()));
+        sunsetTextView.setText(ConvertUtils.convertUnixTimeToHour(weather.getSunset()));
         setWeatherIcon(weather.getIcon());
     }
 
@@ -279,24 +278,4 @@ public class NowFragment extends Fragment implements LocationListener {
                 break;
         }
     }
-
-    private int convertKelvinToCelsius(double k) {
-        k -= 273.15;
-        int c = (int) k;
-        return c;
-    }
-
-    private String convertUnixTimeToHour(long t) {
-        t *= 1000;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
-        return simpleDateFormat.format(t);
-    }
-
-    private String convertUnixTimeToDate(long t) {
-        t *= 1000;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        return simpleDateFormat.format(t);
-    }
-
-
 }
