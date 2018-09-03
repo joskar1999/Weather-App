@@ -41,6 +41,7 @@ public class NowFragment extends Fragment implements LocationListener {
     private ImageView iconImageView;
 
     private LocationManager locationManager;
+    private Location location;
 
     private double lat;
     private double lon;
@@ -96,6 +97,13 @@ public class NowFragment extends Fragment implements LocationListener {
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 60000, 0, this);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 0, this);
         }
+
+        location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        lat = location.getLatitude();
+        lon = location.getLongitude();
+
+        WeatherAsyncTask task = new WeatherAsyncTask();
+        task.execute();
     }
 
     @Override

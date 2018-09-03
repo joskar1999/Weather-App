@@ -31,6 +31,7 @@ public class ForecastFragment extends Fragment implements LocationListener {
     private ArrayList<Forecast> weatherForecast;
 
     private LocationManager locationManager;
+    private Location location;
 
     private View view;
     private RecyclerView recyclerView;
@@ -80,6 +81,13 @@ public class ForecastFragment extends Fragment implements LocationListener {
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 60000, 0, this);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 0, this);
         }
+
+        location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        lat = location.getLatitude();
+        lon = location.getLongitude();
+
+        ForecastAsyncTask forecastAsyncTask = new ForecastAsyncTask();
+        forecastAsyncTask.execute();
     }
 
     @Override
