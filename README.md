@@ -3,3 +3,4 @@ Current weather data, five days forecast with three hour interval based on curre
 Really awesome project
 ### Not working now because API changed
 To be fixed in the future
+Based on openweatherapi
