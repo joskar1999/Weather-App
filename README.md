@@ -4,4 +4,4 @@ Really awesome project
 ### Not working now because API changed
 To be fixed in the future
 Based on openweatherapi
-Not working now
+Not working now unfortunatelly
