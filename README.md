@@ -6,4 +6,5 @@ a
 To be fixed in the future
 b
 Based on openweatherapi
+c
 Not working now unfortunatelly
